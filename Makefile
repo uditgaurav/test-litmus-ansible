@@ -90,7 +90,7 @@ ansible-lint-check:
 	@echo "------------------"
 	@echo "--> Check ansible lint"
 	@echo "------------------"
-	docker run -ti $(DOCKER_REPO)/$(DOCKER_IMAGE):$(DOCKER_TAG) bash -c "bash ansiblelint/lint-check.sh"
+	docker run -i $(DOCKER_REPO)/$(DOCKER_IMAGE):$(DOCKER_TAG) bash -c "bash ansiblelint/lint-check.sh"
 
 .PHONY: save
 save: docker-save
