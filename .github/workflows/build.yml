@@ -60,7 +60,7 @@ jobs:
    
   push:
     runs-on: ubuntu-latest
-    needs: [build,pre-checks]
+    needs: [build,image-checks]
     if: github.event_name == 'push'
     steps:
       - name: Checkout
