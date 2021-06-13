@@ -29,7 +29,8 @@ jobs:
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
-        with:
+        with:      - name: checking dependencies are installed
+        run: make deps
           name: myimage
           path: |
             ${{ github.workspace }}/image.tar
@@ -51,10 +52,7 @@ jobs:
       - name: Load Docker image
         run: |
           docker load --input ${{ github.workspace }}/image.tar        
-
-      - name: checking dependencies are installed
-        run: make deps
-                  
+          
       - name: Running ansible syntax-checks
         run: make syntax-checks
 
