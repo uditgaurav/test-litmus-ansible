@@ -12,8 +12,32 @@ defaults:
     shell: bash
 
 jobs:
-  pre-checks: 
+
+  build:
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build Image
+        env:
+          SAVE_PATH: ${{ github.workspace }}        
+        run: |
+          make docker-build
+          make save
+          chmod +x ${{ github.workspace }}/image.tar
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: myimage
+          path: |
+            ${{ github.workspace }}/image.tar
+            ${{ github.workspace }}/tag.txt     
+
+  image-checks: 
+    runs-on: ubuntu-latest
+    needs: build
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -33,28 +57,7 @@ jobs:
           tar zxvf trivy_0.11.0_Linux-64bit.tar.gz
           make security-checks
           
-  build:
-    runs-on: ubuntu-latest
-    needs: pre-checks
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Build Image
-        env:
-          SAVE_PATH: ${{ github.workspace }}        
-        run: |
-          make docker-build
-          make save
-          chmod +x ${{ github.workspace }}/image.tar
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: myimage
-          path: |
-            ${{ github.workspace }}/image.tar
-            ${{ github.workspace }}/tag.txt        
+   
   push:
     runs-on: ubuntu-latest
     needs: [build,pre-checks]

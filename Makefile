@@ -67,7 +67,7 @@ ansible-syntax-check:
 	@echo "------------------"
 	rc_sum=0; \
 	for playbook in $(PLAYBOOKS); do \
-		sudo docker run --rm -ti --entrypoint=ansible-playbook $(DOCKER_REPO)/$(DOCKER_IMAGE):$(DOCKER_TAG) \
+		sudo docker run --rm -i --entrypoint=ansible-playbook $(DOCKER_REPO)/$(DOCKER_IMAGE):$(DOCKER_TAG) \
 		$${playbook} --syntax-check -i /etc/ansible/hosts -v; \
 		rc_sum=$$((rc_sum+$$?)); \
 	done; \
