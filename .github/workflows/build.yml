@@ -1,11 +1,10 @@
 ---
-## This worflow will build the litmus-e2e image for every new commit. 
 name: litmus-ansible-ci
 on: [push, pull_request]
 
 env:
   DOCKER_REPO: litmuschaos
-  DOCKER_IMAGE: litmus-e2e
+  DOCKER_IMAGE: ansible-runner
   DOCKER_TAG: ci
 
 defaults:
