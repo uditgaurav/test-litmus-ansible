@@ -8,8 +8,8 @@ on:
 
 env:
   DOCKER_REPO: litmuschaos
-  DOCKER_IMAGE: litmus-e2e
-
+  DOCKER_IMAGE: ansible-runner
+  
 defaults:
   run:
     shell: bash  
