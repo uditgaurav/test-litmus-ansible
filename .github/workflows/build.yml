@@ -23,7 +23,7 @@ jobs:
         env:
           SAVE_PATH: ${{ github.workspace }}        
         run: |
-          make docker-build
+          make build
           make save
           chmod +x ${{ github.workspace }}/image.tar
 
