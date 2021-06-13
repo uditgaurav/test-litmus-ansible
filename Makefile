@@ -97,6 +97,6 @@ save: docker-save
 
 docker-save:
 	@echo "---------------------------"
-	@echo "--> Saving litmus-e2e image"
+	@echo "--> Saving litmus-ansible image"
 	@echo "---------------------------"
 	@docker save -o $(SAVE_PATH)/image.tar $(DOCKER_REPO)/$(DOCKER_IMAGE):$(DOCKER_TAG)
